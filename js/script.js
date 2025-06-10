@@ -209,4 +209,94 @@
 
     }, 1000);
 
+    // On form submit event
+    answersFormElement.addEventListener('submit', (event) => {
+
+        // Prevent defautl behaviour
+        event.preventDefault();
+
+        // Initialize an array of inputNumbers numbers
+        const inputNumbers = [];
+
+        // Initialize remembered numbers variable
+        let rememberedNumbers = 0;
+
+        // Initialize not remembered numbers variable
+        let notRememberedNumbers = 0;
+
+        // Loop for each input element inside answers form
+        for (let i = 0; i < TOTAL_NUMBERS; i++) {
+
+            // Get current input DOM element to examine dinamically
+            const inputElement = document.querySelectorAll('#answers-form input')[i];
+
+            // Get its value
+            const inputElementValue = Number(inputElement.value);
+
+            // Remove text bg danger class from input DOM element to reset previous output validation colors
+            inputElement.classList.remove('text-bg-danger');
+
+            // Remove text danger class from message DOM element to reset previous output validation colors
+            inputElement.classList.remove('text-danger');
+
+            // IF value is valid
+            if (isValidInput(inputElementValue) === true) {
+
+                // IF input numbers array includes inserted number being examinated
+                if ( inputNumbers.includes(inputElementValue) ) {
+
+                    // Change number input text color to red
+                    inputElement.classList.add('text-bg-danger');
+
+                    // Change message output
+                    changeMessage('text-danger', 'Questo numero è già stato inserito!')
+
+                    // Stop parsing inputs
+                    break;
+
+                }
+                // ELSE (it's a new number)
+                else {
+
+                    inputNumbers.push(inputElementValue);
+
+                    // IF generated numbers array includes inserted number being examinated
+                    if ( generatedNumbers.includes(inputElementValue) ) {
+
+                        // Change remembered number input text color to green
+                        inputElement.classList.add('text-success');
+
+                        // Increment remembered number count
+                        rememberedNumbers++;
+
+                    }
+                    // ELSE (value not included)
+                    else {
+                        
+                        // Change not remembered number input text color to yellow
+                        inputElement.classList.add('text-danger');
+
+                        // Increment not remembered number count
+                        notRememberedNumbers++;
+
+                    }
+
+                }
+            
+            }
+            // ELSE (value is not valid)
+            else {
+
+                // Change wrong input text color to red
+                inputElement.classList.add('text-bg-danger');
+
+                // Stop parsing inputs
+                break;
+
+            }
+            
+        }
+
+    });
+
     // #endregion Script logic section
