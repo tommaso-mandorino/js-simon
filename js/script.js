@@ -170,5 +170,43 @@
         numberListElement.appendChild(newListItemElement);
 
     }
-    
+
+    // Initialize countdown number to available seconds
+    countdownElement.innerText = String(AVAILABLE_SECONDS);
+
+    // Start timer
+    const timer = setInterval( () => {
+
+        // IF available seconds are ended
+        if (Number(countdownElement.innerHTML) === 1) {
+
+            // Stop timer
+            clearInterval(timer);
+
+            // Hide countdown by adding display none class
+            countdownElement.classList.add('d-none');
+
+            // Remove display flex class
+            numberListElement.classList.remove('d-flex');
+
+            // Hide numbers list by adding display none class
+            numberListElement.classList.add('d-none');
+
+            // Show answers form by removing display none class
+            answersFormElement.classList.remove('d-none');
+
+            // Change instructions text
+            instructionsElement.innerText = 'Tempo scaduto! Adesso indovina i numeri:';
+
+        }
+        // ELSE
+        else {
+
+            // Update countdown text by subtracting 1 second
+            countdownElement.innerText = Number(countdownElement.innerText) - 1;
+
+        }
+
+    }, 1000);
+
     // #endregion Script logic section
