@@ -12,7 +12,7 @@
         const TOTAL_NUMBERS = 5;
 
         // Available seconds to the user for memorizing random numbers
-        const AVAILABLE_SECONDS = 3
+        const AVAILABLE_SECONDS = 30
 
     // endregion Manual parameters constants
 
@@ -295,6 +295,44 @@
 
             }
             
+        }
+
+        /*
+            IF remembered numbers + not remembered numbers sum is equal to total numbers
+            then all numbers are valid and classified, so we are ready to show results
+        */
+        if (rememberedNumbers + notRememberedNumbers === TOTAL_NUMBERS) {
+
+            // IF user remembered all numbers
+            if (rememberedNumbers === TOTAL_NUMBERS) {
+            
+                // Change message output
+                changeMessage('text-success', 'Hai ricordato TUTTI i numeri!');
+
+            }
+            // ELSE IF user remembered just 1 number
+            else if (rememberedNumbers === 1) {
+
+                // Change message output
+                changeMessage('text-warning', 'Hai ricordato SOLO 1 numero!');
+
+            }
+            // ELSE IF user didn't remember a single number
+            else if (rememberedNumbers === 0) {
+
+
+                // Change message output
+                changeMessage('text-danger', 'Non hai ricordato NESSUN numero!');
+
+            }
+            // ELSE (user remembered just some numbers)
+            else {
+
+                // Change message output
+                changeMessage('text-info', `Hai ricordato ${rememberedNumbers} numeri.`);
+
+            }
+
         }
 
     });
