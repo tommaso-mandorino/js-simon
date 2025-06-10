@@ -129,3 +129,46 @@
     }
 
 // #endregion Function declaration section
+
+
+
+// #region Script logic section
+
+    // Initialize an array of generated numbers
+    const generatedNumbers = [];
+
+    // Loop for each number to generate
+    for (let i = 0; i < TOTAL_NUMBERS; i++) {
+
+        // Initialize random number variable
+        let randomNumber;
+
+        do {
+
+            // Generate a new random number
+            randomNumber = random(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+
+            // IF the new random number is not included in the array (avoid repeating numbers)
+            if(generatedNumbers.includes(randomNumber) === false) {
+
+                // Exit the loop
+                break;
+            }
+
+        } while (true);
+
+        // Push generated number in its array
+        generatedNumbers.push(randomNumber);
+        
+        // Create a new list item
+        const newListItemElement = document.createElement('li');
+
+        // Fill it with a random number
+        newListItemElement.append(randomNumber);
+
+        // Append it to the list
+        numberListElement.appendChild(newListItemElement);
+
+    }
+    
+    // #endregion Script logic section
